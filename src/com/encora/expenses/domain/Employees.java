@@ -1,3 +1,7 @@
+package com.encora.expenses.domain;
+
+import com.encora.expenses.domain.Employee;
+
 public class Employees {
 
     private Employee[] employees;

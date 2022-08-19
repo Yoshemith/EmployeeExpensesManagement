@@ -1,3 +1,5 @@
+package com.encora.expenses.domain;
+
 public class ExpenseItem{
     private int id;
     private int claimId;

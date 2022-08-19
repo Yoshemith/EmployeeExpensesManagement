@@ -1,3 +1,5 @@
+package com.encora.expenses.domain;
+
 public class Employee {
 
     //Properties
@@ -15,7 +17,7 @@ public class Employee {
 
     }
 
-    //Constructor that allows to create a Employee when you instantiate the class
+    //Constructor that allows to create a com.encora.expenses.domain.Employee when you instantiate the class
     //This way you do it directly with only id and jobTitle (in this case)
     public Employee(int id, String jobTitle) {
         this.id = id;

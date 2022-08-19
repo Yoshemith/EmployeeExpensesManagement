@@ -1,7 +1,14 @@
+package com.encora.expenses;
+
+import com.encora.expenses.domain.Employee;
+import com.encora.expenses.domain.Employees;
+import com.encora.expenses.domain.ExpenseClaim;
+import com.encora.expenses.domain.ExpenseItem;
+
 public class Main {
 
     public static void main(String[] args) {
-        Employee employee1 = new Employee(); //Instantiation of the Employee Class
+        Employee employee1 = new Employee(); //Instantiation of the com.encora.expenses.domain.Employee Class
         employee1.setId(1);
         employee1.setTitle("Mr.");
         employee1.setFirstName("Yoshe");
@@ -28,10 +35,6 @@ public class Main {
 
         Employee foundEmployee2 = employees.findBySurname("Cyan");
         System.out.println("Didn't find " + (foundEmployee2 == null));
-
-        Department department = new Department("Finance", "Saul Goodman");
-
-        AlternativeDepartment alternativeDepartment = new AlternativeDepartment("Personnel", "Mick Jeffrey");
 
         ExpenseClaim expenseClaim = new ExpenseClaim(1, 1, "18/08/2022", 20);
         expenseClaim.setApproved(false);
