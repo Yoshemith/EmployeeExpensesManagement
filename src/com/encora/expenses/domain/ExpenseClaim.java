@@ -1,17 +1,18 @@
 package com.encora.expenses.domain;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class ExpenseClaim {
 
     private int id;
     private int employeeId;
-    private String dateOfClaim;
+    private LocalDate dateOfClaim;
     private double totalAmount;
     private boolean approved;
     private boolean paid;
 
-    public ExpenseClaim(int id, int employeeId, String dateOfClaim, double totalAmount) {
+    public ExpenseClaim(int id, int employeeId, LocalDate dateOfClaim, double totalAmount) {
         this.id = id;
         this.employeeId = employeeId;
         this.dateOfClaim = dateOfClaim;
@@ -40,7 +41,7 @@ public class ExpenseClaim {
         return employeeId;
     }
 
-    public String getDateOfClaim() {
+    public LocalDate getDateOfClaim() {
         return dateOfClaim;
     }
 

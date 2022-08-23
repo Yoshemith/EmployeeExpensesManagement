@@ -17,7 +17,7 @@ public class Employee {
     //Constructor that allows to use every get or set method in here
     //No need to create it manually though, java does this for you.
     public Employee() {
-
+        claims = new ExpenseClaim[10];
     }
 
     //Constructor that allows to create a com.encora.expenses.domain.Employee when you instantiate the class
@@ -25,6 +25,7 @@ public class Employee {
     public Employee(int id, String jobTitle) {
         this.id = id;
         this.jobTitle = jobTitle;
+        claims = new ExpenseClaim[10];
     }
 
     //Constructor that allows you to create an employee when you instantiate the class
@@ -103,6 +104,10 @@ public class Employee {
 
     public Department getDepartment() {
         return department;
+    }
+
+    public ExpenseClaim[] getClaims() {
+        return claims;
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.encora.expenses;
 
 import com.encora.expenses.domain.*;
 
+import java.time.LocalDate;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -33,14 +35,13 @@ public class Main {
         Employee foundEmployee2 = employees.findBySurname("Cyan");
         System.out.println("Didn't find " + (foundEmployee2 == null));
 
-        ExpenseClaim expenseClaim = new ExpenseClaim(1, 1, "18/08/2022", 20);
+        ExpenseClaim expenseClaim = new ExpenseClaim(1, 1, LocalDate.now(), 20);
         expenseClaim.setApproved(false);
         expenseClaim.setPaid(true);
 
         System.out.println(expenseClaim.isPaid());
 
         ExpenseItem expenseItem = new ExpenseItem(1, 1, ExpenseType.TRAVEL, "Just something", 254.4);
-
         System.out.println(expenseItem.getDescription());
 
         System.out.println(employee1.toString());
@@ -53,6 +54,8 @@ public class Main {
         employee3.setSurname("Castellanos");
 
         System.out.println(employee1.equals(employee3));
+        System.out.println(employee1 == employee1);
+        System.out.println(employee1.getClass());
 
     }
 
