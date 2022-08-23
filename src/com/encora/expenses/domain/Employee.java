@@ -1,5 +1,8 @@
 package com.encora.expenses.domain;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Employee {
 
     //Properties
@@ -8,7 +11,7 @@ public class Employee {
     private String firstName;
     private String surname;
     private String jobTitle;
-    private String department;
+    private Department department;
     private ExpenseClaim[] claims;
 
     //Constructor that allows to use every get or set method in here
@@ -27,7 +30,7 @@ public class Employee {
     //Constructor that allows you to create an employee when you instantiate the class
     //This way the class would appear to be read-only
     //By using this constructor the set Methods are not necessary only the get methods.
-    public Employee(int id, String title, String firstName, String surname, String jobTitle, String department) {
+    public Employee(int id, String title, String firstName, String surname, String jobTitle, Department department) {
         this.id = id;
         this.title = title;
         this.firstName = firstName;
@@ -94,11 +97,39 @@ public class Employee {
         this.jobTitle = jobTitle;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(Department department) {
         this.department = department;
     }
 
-    public String getDepartment() {
+    public Department getDepartment() {
         return department;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", surname='" + surname + '\'' +
+                ", jobTitle='" + jobTitle + '\'' +
+                ", department='" + department + '\'' +
+                ", claims=" + Arrays.toString(claims) +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return id == employee.id && Objects.equals(title, employee.title) && Objects.equals(firstName, employee.firstName) && Objects.equals(surname, employee.surname) && Objects.equals(jobTitle, employee.jobTitle) && Objects.equals(department, employee.department) && Arrays.equals(claims, employee.claims);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(id, title, firstName, surname, jobTitle, department);
+        result = 31 * result + Arrays.hashCode(claims);
+        return result;
     }
 }

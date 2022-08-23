@@ -1,5 +1,7 @@
 package com.encora.expenses.domain;
 
+import java.util.Objects;
+
 public class ExpenseClaim {
 
     private int id;
@@ -52,5 +54,30 @@ public class ExpenseClaim {
 
     public boolean isPaid() {
         return paid;
+    }
+
+    @Override
+    public String toString() {
+        return "ExpenseClaim{" +
+                "id=" + id +
+                ", employeeId=" + employeeId +
+                ", dateOfClaim='" + dateOfClaim + '\'' +
+                ", totalAmount=" + totalAmount +
+                ", approved=" + approved +
+                ", paid=" + paid +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ExpenseClaim that = (ExpenseClaim) o;
+        return id == that.id && employeeId == that.employeeId && Double.compare(that.totalAmount, totalAmount) == 0 && approved == that.approved && paid == that.paid && Objects.equals(dateOfClaim, that.dateOfClaim);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, employeeId, dateOfClaim, totalAmount, approved, paid);
     }
 }

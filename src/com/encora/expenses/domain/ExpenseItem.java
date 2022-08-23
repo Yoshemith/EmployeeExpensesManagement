@@ -1,13 +1,15 @@
 package com.encora.expenses.domain;
 
+import java.util.Objects;
+
 public class ExpenseItem{
     private int id;
     private int claimId;
-    private String expenseType;
+    private ExpenseType expenseType;
     private String description;
     private double amount;
 
-    public ExpenseItem(int id, int claimId, String expenseType, String description, double amount) {
+    public ExpenseItem(int id, int claimId, ExpenseType expenseType, String description, double amount) {
         this.id = id;
         this.claimId = claimId;
         this.expenseType = expenseType;
@@ -23,7 +25,7 @@ public class ExpenseItem{
         return claimId;
     }
 
-    public String getExpenseType() {
+    public ExpenseType getExpenseType() {
         return expenseType;
     }
 
@@ -33,5 +35,29 @@ public class ExpenseItem{
 
     public double getAmount() {
         return amount;
+    }
+
+    @Override
+    public String toString() {
+        return "ExpenseItem{" +
+                "id=" + id +
+                ", claimId=" + claimId +
+                ", expenseType='" + expenseType + '\'' +
+                ", description='" + description + '\'' +
+                ", amount=" + amount +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ExpenseItem that = (ExpenseItem) o;
+        return id == that.id && claimId == that.claimId && Double.compare(that.amount, amount) == 0 && Objects.equals(expenseType, that.expenseType) && Objects.equals(description, that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, claimId, expenseType, description, amount);
     }
 }

@@ -1,9 +1,6 @@
 package com.encora.expenses;
 
-import com.encora.expenses.domain.Employee;
-import com.encora.expenses.domain.Employees;
-import com.encora.expenses.domain.ExpenseClaim;
-import com.encora.expenses.domain.ExpenseItem;
+import com.encora.expenses.domain.*;
 
 public class Main {
 
@@ -27,7 +24,7 @@ public class Main {
         Employees employees = new Employees(15);
         employees.addEmployee(employee1);
         employees.addEmployee(employee2);
-        employees.addEmployee( new Employee(3, "Mr.", "Gabriel", "Cameron", "Director", "Finance"));
+        employees.addEmployee( new Employee(3, "Mr.", "Gabriel", "Cameron", "Director", Department.MARKETING));
 
         employees.printEmployees();
         Employee foundEmployee = employees.findBySurname("Cameron");
@@ -42,9 +39,20 @@ public class Main {
 
         System.out.println(expenseClaim.isPaid());
 
-        ExpenseItem expenseItem = new ExpenseItem(1, 1, "Travel", "Just something", 254.4);
+        ExpenseItem expenseItem = new ExpenseItem(1, 1, ExpenseType.TRAVEL, "Just something", 254.4);
 
         System.out.println(expenseItem.getDescription());
+
+        System.out.println(employee1.toString());
+        System.out.println(employee1);
+
+        Employee employee3 = new Employee();
+        employee3.setId(1);
+        employee3.setTitle("Mr.");
+        employee3.setFirstName("Yoshe");
+        employee3.setSurname("Castellanos");
+
+        System.out.println(employee1.equals(employee3));
 
     }
 
