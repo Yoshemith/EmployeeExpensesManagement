@@ -13,7 +13,7 @@ public class ExpenseManagementSystem {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         UIFunctions uiFunctions = new UIFunctions();
-        Employees employees = new Employees(10);
+        Employees employees = new Employees();
 
         boolean readyToExit = false;
 

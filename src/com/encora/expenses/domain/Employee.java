@@ -1,5 +1,6 @@
 package com.encora.expenses.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -12,12 +13,12 @@ public class Employee {
     private String surname;
     private String jobTitle;
     private Department department;
-    private ExpenseClaim[] claims;
+    private ArrayList<ExpenseClaim> claims = new ArrayList<>();
 
     //Constructor that allows to use every get or set method in here
     //No need to create it manually though, java does this for you.
     public Employee() {
-        claims = new ExpenseClaim[10];
+
     }
 
     //Constructor that allows to create a com.encora.expenses.domain.Employee when you instantiate the class
@@ -25,7 +26,7 @@ public class Employee {
     public Employee(int id, String jobTitle) {
         this.id = id;
         this.jobTitle = jobTitle;
-        claims = new ExpenseClaim[10];
+
     }
 
     //Constructor that allows you to create an employee when you instantiate the class
@@ -106,7 +107,7 @@ public class Employee {
         return department;
     }
 
-    public ExpenseClaim[] getClaims() {
+    public ArrayList<ExpenseClaim> getClaims() {
         return claims;
     }
 
@@ -118,8 +119,8 @@ public class Employee {
                 ", firstName='" + firstName + '\'' +
                 ", surname='" + surname + '\'' +
                 ", jobTitle='" + jobTitle + '\'' +
-                ", department='" + department + '\'' +
-                ", claims=" + Arrays.toString(claims) +
+                ", department=" + department +
+                ", claims=" + claims +
                 '}';
     }
 
@@ -128,13 +129,11 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return id == employee.id && Objects.equals(title, employee.title) && Objects.equals(firstName, employee.firstName) && Objects.equals(surname, employee.surname) && Objects.equals(jobTitle, employee.jobTitle) && Objects.equals(department, employee.department) && Arrays.equals(claims, employee.claims);
+        return id == employee.id && Objects.equals(title, employee.title) && Objects.equals(firstName, employee.firstName) && Objects.equals(surname, employee.surname) && Objects.equals(jobTitle, employee.jobTitle) && department == employee.department && Objects.equals(claims, employee.claims);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, title, firstName, surname, jobTitle, department);
-        result = 31 * result + Arrays.hashCode(claims);
-        return result;
+        return Objects.hash(id, title, firstName, surname, jobTitle, department, claims);
     }
 }

@@ -23,7 +23,7 @@ public class Main {
         employee2.setSurname("Yellow");
 
         //Where the employees will be stored
-        Employees employees = new Employees(15);
+        Employees employees = new Employees();
         employees.addEmployee(employee1);
         employees.addEmployee(employee2);
         employees.addEmployee( new Employee(3, "Mr.", "Gabriel", "Cameron", "Director", Department.MARKETING));

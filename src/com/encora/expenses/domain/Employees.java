@@ -1,41 +1,26 @@
 package com.encora.expenses.domain;
 
-import com.encora.expenses.domain.Employee;
 import com.encora.expenses.exceptions.EmployeeNotFoundException;
+
+import java.util.HashSet;
 
 public class Employees {
 
-    private Employee[] employees;
-
-    public Employees(int numberOfEmployees) {
-        employees = new Employee[numberOfEmployees];
-    }
+    private HashSet<Employee> employees = new HashSet<>();
 
     public void addEmployee(Employee employee) {
-        int firstEmptyPosition = -1;
-        for (int i = 0; i < employees.length; i++) {
-            if (firstEmptyPosition == -1 && employees[i] == null) {
-                firstEmptyPosition = i;
-            }
-        }
-        if (firstEmptyPosition == -1) {
-            System.out.println("Sorry the array is full");
-        } else {
-            employees[firstEmptyPosition] = employee;
-        }
+        employees.add(employee);
     }
 
     public void printEmployees(){
         for (Employee e: employees) {
-            if (e != null) {
-                System.out.println(e);
-            }
+            System.out.println(e);
         }
     }
 
     public Employee findBySurname(String surname) {
         for (Employee e : employees) {
-            if (e != null && e.getSurname().equals(surname)) {
+            if (e.getSurname().equals(surname)) {
                 return e;
             }
         }
@@ -44,7 +29,7 @@ public class Employees {
 
     public boolean employeeExists(int id) {
         for (Employee e : employees) {
-            if (e != null && e.getId() == id) {
+            if (e.getId() == id) {
                 return true;
             }
         }
@@ -59,14 +44,8 @@ public class Employees {
         }
 
         for (Employee e : employees) {
-            if (e != null && e.getId() == employeeId) {
-                int firstEmptyPosition = -1;
-                for (int i = 0; i < e.getClaims().length; i++) {
-                    if(firstEmptyPosition == -1 && e.getClaims()[i] == null) {
-                        firstEmptyPosition = i;
-                    }
-                }
-                e.getClaims()[firstEmptyPosition] = claim;
+            if (e.getId() == employeeId) {
+                e.getClaims().add(claim);
             }
         }
     }
