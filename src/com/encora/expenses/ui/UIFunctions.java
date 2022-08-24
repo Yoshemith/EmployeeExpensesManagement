@@ -3,6 +3,7 @@ package com.encora.expenses.ui;
 import com.encora.expenses.domain.Department;
 import com.encora.expenses.domain.Employee;
 import com.encora.expenses.domain.ExpenseClaim;
+import com.encora.expenses.domain.StaffEmployee;
 import com.encora.expenses.exceptions.InvalidEmployeeIdException;
 import com.encora.expenses.exceptions.NameTooShortException;
 import com.encora.expenses.utilities.EmployeeUtilities;
@@ -71,8 +72,25 @@ public class UIFunctions {
             }
         }
 
+        System.out.println("Is this a better of staff? Y/N");
+        String isAStaffMember = scanner.nextLine();
+        if (isAStaffMember.toUpperCase().equals("Y")) {
+            StaffEmployee staff = new StaffEmployee(employee);
+
+            System.out.println("Enter the username");
+            String username = scanner.nextLine();
+            staff.setUsername(username);
+
+            System.out.println("Enter the password");
+            String password = scanner.nextLine();
+            staff.setPassword(password);
+
+            return staff;
+        } else {
+            return(employee);
+        }
+
         //System.out.println(employee);
-        return(employee);
     }
 
     public ExpenseClaim registerNewExpenseClaim() {
