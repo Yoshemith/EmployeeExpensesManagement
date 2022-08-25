@@ -27,6 +27,15 @@ public class Employees {
         return null;
     }
 
+    public Employee findById(int id) {
+        for (Employee e : employees) {
+            if (e.getId() == id) {
+                return e;
+            }
+        }
+        return null;
+    }
+
     public boolean employeeExists(int id) {
         for (Employee e : employees) {
             if (e.getId() == id) {
