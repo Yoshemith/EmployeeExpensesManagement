@@ -1,12 +1,14 @@
 package com.encora.expenses;
 
 import com.encora.expenses.domain.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.time.LocalDate;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JsonProcessingException {
         Employee employee1 = new Employee(); //Instantiation of the com.encora.expenses.domain.Employee Class
         employee1.setId(1);
         employee1.setTitle("Mr.");
@@ -56,6 +58,17 @@ public class Main {
         System.out.println(employee1.equals(employee3));
         System.out.println(employee1 == employee1);
         System.out.println(employee1.getClass());
+
+
+        System.out.println(employee1);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String employee1Json = objectMapper.writeValueAsString(employee1);
+        System.out.println(employee1Json);
+
+        StaffEmployee employeeFromJson = objectMapper.readValue(employee1Json, StaffEmployee.class);
+        System.out.println(employeeFromJson);
+
 
     }
 

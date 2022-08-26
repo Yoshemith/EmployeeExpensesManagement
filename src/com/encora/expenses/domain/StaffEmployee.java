@@ -1,7 +1,13 @@
 package com.encora.expenses.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.Objects;
 
+//This annotation will tell jackson that, when we're working with json
+// and we try to create an instance of one of those classes from some json
+// if there are properties in the json that don't exist in the class, just ignore them.
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class StaffEmployee extends Employee implements Comparable<Employee> {
 
     private String username;
