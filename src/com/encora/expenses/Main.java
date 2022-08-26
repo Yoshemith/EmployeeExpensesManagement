@@ -35,7 +35,7 @@ public class Main {
         Employee foundEmployee2 = employees.findBySurname("Cyan");
         System.out.println("Didn't find " + (foundEmployee2 == null));
 
-        ExpenseClaim expenseClaim = new ExpenseClaim(1, 1, LocalDate.now(), 20);
+        ExpenseClaim expenseClaim = new ExpenseClaim(1, 1, LocalDate.now());
         expenseClaim.setApproved(false);
         expenseClaim.setPaid(true);
 

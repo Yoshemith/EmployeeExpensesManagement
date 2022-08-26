@@ -118,7 +118,6 @@ public class Employee implements Comparable<Employee>{
                 ", surname='" + surname + '\'' +
                 ", jobTitle='" + jobTitle + '\'' +
                 ", department=" + department +
-                ", claims=" + claims +
                 '}';
     }
 

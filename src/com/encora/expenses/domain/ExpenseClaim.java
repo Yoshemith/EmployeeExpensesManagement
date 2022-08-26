@@ -1,6 +1,8 @@
 package com.encora.expenses.domain;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class ExpenseClaim {
@@ -8,17 +10,28 @@ public class ExpenseClaim {
     private int id;
     private int employeeId;
     private LocalDate dateOfClaim;
-    private double totalAmount;
     private boolean approved;
     private boolean paid;
 
-    public ExpenseClaim(int id, int employeeId, LocalDate dateOfClaim, double totalAmount) {
+    private List<ExpenseItem> expenseItems;
+
+    public ExpenseClaim(int id, int employeeId, LocalDate dateOfClaim) {
         this.id = id;
         this.employeeId = employeeId;
         this.dateOfClaim = dateOfClaim;
-        this.totalAmount = totalAmount;
         this.approved = false;
         this.paid = false;
+        this.expenseItems = new ArrayList<>();
+    }
+
+    public void addExpenseItem(ExpenseItem item){
+        expenseItems.add(item);
+    }
+
+    public void printExpenseItems() {
+        for (ExpenseItem ei: expenseItems) {
+            System.out.println(ei);
+        }
     }
 
     public void setApproved(boolean approved) {
@@ -46,7 +59,11 @@ public class ExpenseClaim {
     }
 
     public double getTotalAmount() {
-        return totalAmount;
+        Double total = 0d;
+        for (ExpenseItem ei: expenseItems) {
+            total += ei.getAmount();
+        }
+        return total;
     }
 
     public boolean isApproved() {
@@ -63,7 +80,6 @@ public class ExpenseClaim {
                 "id=" + id +
                 ", employeeId=" + employeeId +
                 ", dateOfClaim='" + dateOfClaim + '\'' +
-                ", totalAmount=" + totalAmount +
                 ", approved=" + approved +
                 ", paid=" + paid +
                 '}';
@@ -74,11 +90,11 @@ public class ExpenseClaim {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ExpenseClaim that = (ExpenseClaim) o;
-        return id == that.id && employeeId == that.employeeId && Double.compare(that.totalAmount, totalAmount) == 0 && approved == that.approved && paid == that.paid && Objects.equals(dateOfClaim, that.dateOfClaim);
+        return id == that.id && employeeId == that.employeeId && approved == that.approved && paid == that.paid && Objects.equals(dateOfClaim, that.dateOfClaim) && Objects.equals(expenseItems, that.expenseItems);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, employeeId, dateOfClaim, totalAmount, approved, paid);
+        return Objects.hash(id, employeeId, dateOfClaim, approved, paid, expenseItems);
     }
 }
