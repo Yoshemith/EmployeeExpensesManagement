@@ -2,7 +2,7 @@ package com.encora.expenses.domain;
 
 import java.util.Objects;
 
-public class StaffEmployee extends Employee{
+public class StaffEmployee extends Employee implements Comparable<Employee> {
 
     private String username;
     private String password;

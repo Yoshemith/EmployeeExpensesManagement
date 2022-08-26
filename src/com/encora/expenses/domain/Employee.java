@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Employee {
+public class Employee implements Comparable<Employee>{
 
     //Properties
     private int id;
@@ -135,5 +135,11 @@ public class Employee {
     @Override
     public int hashCode() {
         return Objects.hash(id, title, firstName, surname, jobTitle, department, claims);
+    }
+
+    @Override
+    public int compareTo(Employee o) {
+
+        return Integer.valueOf(id).compareTo(o.getId());
     }
 }
