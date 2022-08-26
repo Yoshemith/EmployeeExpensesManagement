@@ -2,24 +2,26 @@ package com.encora.expenses.domain;
 
 import com.encora.expenses.exceptions.EmployeeNotFoundException;
 
-import java.util.HashSet;
+import java.util.*;
 
 public class Employees {
 
-    private HashSet<Employee> employees = new HashSet<>();
+    private Map<Integer, Employee> employees = new HashMap<>();
 
     public void addEmployee(Employee employee) {
-        employees.add(employee);
+        employees.put(employee.getId(), employee);
     }
 
     public void printEmployees(){
-        for (Employee e: employees) {
+        List<Employee> employeeList = new ArrayList<>(employees.values());
+        Collections.sort(employeeList);
+        for (Employee e: employeeList) {
             System.out.println(e);
         }
     }
 
     public Employee findBySurname(String surname) {
-        for (Employee e : employees) {
+        for (Employee e : employees.values()) {
             if (e.getSurname().equals(surname)) {
                 return e;
             }
@@ -28,21 +30,11 @@ public class Employees {
     }
 
     public Employee findById(int id) {
-        for (Employee e : employees) {
-            if (e.getId() == id) {
-                return e;
-            }
-        }
-        return null;
+        return employees.get(id);
     }
 
     public boolean employeeExists(int id) {
-        for (Employee e : employees) {
-            if (e.getId() == id) {
-                return true;
-            }
-        }
-        return false;
+        return employees.containsKey(id);
     }
 
     public void addExpenseClaim(ExpenseClaim claim) throws EmployeeNotFoundException {
@@ -52,9 +44,9 @@ public class Employees {
             throw new EmployeeNotFoundException();
         }
 
-        for (Employee e : employees) {
+        for (Employee e : employees.values()) {
             if (e.getId() == employeeId) {
-                e.getClaims().add(claim);
+                e.getClaims().put(claim.getId(), claim);
             }
         }
     }

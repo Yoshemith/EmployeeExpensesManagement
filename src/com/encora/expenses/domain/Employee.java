@@ -1,8 +1,6 @@
 package com.encora.expenses.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
+import java.util.*;
 
 public class Employee implements Comparable<Employee>{
 
@@ -13,7 +11,7 @@ public class Employee implements Comparable<Employee>{
     private String surname;
     private String jobTitle;
     private Department department;
-    private ArrayList<ExpenseClaim> claims = new ArrayList<>();
+    private Map<Integer, ExpenseClaim> claims = new HashMap<>();
 
     //Constructor that allows to use every get or set method in here
     //No need to create it manually though, java does this for you.
@@ -107,7 +105,7 @@ public class Employee implements Comparable<Employee>{
         return department;
     }
 
-    public ArrayList<ExpenseClaim> getClaims() {
+    public Map<Integer, ExpenseClaim> getClaims() {
         return claims;
     }
 
@@ -139,7 +137,6 @@ public class Employee implements Comparable<Employee>{
 
     @Override
     public int compareTo(Employee o) {
-
-        return Integer.valueOf(id).compareTo(o.getId());
+        return this.surname.compareTo(o.getSurname());
     }
 }
