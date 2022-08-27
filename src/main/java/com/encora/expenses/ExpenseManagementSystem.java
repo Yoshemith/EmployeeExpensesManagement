@@ -10,12 +10,20 @@ import com.encora.expenses.utilities.ExpenseAnalysis;
 import com.encora.expenses.utilities.ExpenseAnalysisImpl;
 import com.encora.expenses.utilities.ExpenseAnalysisTempImpl;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class ExpenseManagementSystem {
 
-    public static void main(String[] args) throws ClassNotFoundException {
+    public static void main(String[] args) throws ClassNotFoundException, IOException {
         Scanner scanner = new Scanner(System.in);
         UIFunctions uiFunctions = new UIFunctions();
         Employees employees = new EmployeesDatabaseImpl();
@@ -32,6 +40,7 @@ public class ExpenseManagementSystem {
             System.out.println("e - register new employee");
             System.out.println("c - register new claim");
             System.out.println("p - print all employees");
+            System.out.println("f - export the data to a file");
             System.out.println("a - approve claim");
             System.out.println("r1 - outstanding expense claims");
             System.out.println("r2 - paid expense claims");
@@ -60,6 +69,22 @@ public class ExpenseManagementSystem {
                     break;
                 case "p":
                     employees.printEmployees();
+                    break;
+                case "f":
+                    List<Employee> employeeList = employees.getEmployeeList();
+                    Path report = Paths.get(System.getProperty("user.home") + File.separator + "expense-report.txt");
+                    String lineTerminator = System.getProperty("line.separator");
+
+                    Collections.sort(employeeList);
+                    for (Employee emp: employeeList) {
+                        Files.writeString(report, emp.toString() + lineTerminator, StandardOpenOption.CREATE , StandardOpenOption.APPEND);
+                        for (ExpenseClaim empClaim: emp.getClaims().values()) {
+                            Files.writeString(report, empClaim.toString() + lineTerminator, StandardOpenOption.CREATE , StandardOpenOption.APPEND);
+                            List<String> claimData = empClaim.getExpenseItems().stream().map(ei -> ei.toString()).toList();
+                            Files.write(report, claimData, StandardOpenOption.APPEND);
+                            Files.writeString(report, "Total value of claim: " + empClaim.getTotalAmount() + lineTerminator, StandardOpenOption.APPEND);
+                        }
+                    }
                     break;
                 case "a":
                     System.out.println("Enter the claim Id:");
