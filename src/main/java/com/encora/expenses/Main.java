@@ -4,11 +4,12 @@ import com.encora.expenses.domain.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.sql.*;
 import java.time.LocalDate;
 
 public class Main {
 
-    public static void main(String[] args) throws JsonProcessingException {
+    public static void main(String[] args) throws JsonProcessingException, ClassNotFoundException, SQLException {
         Employee employee1 = new Employee(); //Instantiation of the com.encora.expenses.domain.Employee Class
         employee1.setId(1);
         employee1.setTitle("Mr.");
@@ -25,7 +26,7 @@ public class Main {
         employee2.setSurname("Yellow");
 
         //Where the employees will be stored
-        Employees employees = new Employees();
+        EmployeesInMemoryImpl employees = new EmployeesInMemoryImpl();
         employees.addEmployee(employee1);
         employees.addEmployee(employee2);
         employees.addEmployee( new Employee(3, "Mr.", "Gabriel", "Cameron", "Director", Department.MARKETING));
@@ -69,6 +70,21 @@ public class Main {
         StaffEmployee employeeFromJson = objectMapper.readValue(employee1Json, StaffEmployee.class);
         System.out.println(employeeFromJson);
 
+        //Class.forName("com.mysql.cj.jdbc.Driver");
+        Class.forName("org.h2.Driver");
+        try (Connection connection = DriverManager.getConnection("jdbc:h2:./customerdata", "sa", "")){
+
+            Statement statement = connection.createStatement();
+            //statement.executeUpdate("CREATE TABLE customer (id INTEGER, name VARCHAR(255), age INTEGER, PRIMARY KEY (id) )");
+            //statement.executeUpdate("INSERT INTO customer (id, name, age) VALUES (2, 'Andrea', '26')");
+            ResultSet rs = statement.executeQuery("SELECT * FROM customer");
+
+            while (rs.next()) {
+                System.out.println(rs.getInt("id"));
+                System.out.println(rs.getString("name"));
+            }
+        }
+        //connection.close();
 
     }
 

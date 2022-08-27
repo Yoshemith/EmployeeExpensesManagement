@@ -24,6 +24,10 @@ public class ExpenseClaim {
         this.expenseItems = new ArrayList<>();
     }
 
+    public List<ExpenseItem> getExpenseItems() {
+        return expenseItems;
+    }
+
     public void addExpenseItem(ExpenseItem item){
         expenseItems.add(item);
     }

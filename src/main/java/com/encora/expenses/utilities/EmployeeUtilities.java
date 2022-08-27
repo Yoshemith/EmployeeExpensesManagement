@@ -1,13 +1,13 @@
 package com.encora.expenses.utilities;
 
 import com.encora.expenses.domain.Employee;
-import com.encora.expenses.domain.Employees;
+import com.encora.expenses.domain.EmployeesInMemoryImpl;
 import com.encora.expenses.exceptions.InvalidEmployeeIdException;
 import com.encora.expenses.exceptions.NameTooShortException;
 
 public class EmployeeUtilities {
 
-    public boolean employeeExists(Employees employees, Employee employee) {
+    public boolean employeeExists(EmployeesInMemoryImpl employees, Employee employee) {
         return employees.findBySurname(employee.getSurname()) != null;
     }
 

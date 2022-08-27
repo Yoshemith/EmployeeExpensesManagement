@@ -1,14 +1,13 @@
 package com.encora.expenses;
 
-import com.encora.expenses.domain.Employee;
-import com.encora.expenses.domain.Employees;
-import com.encora.expenses.domain.ExpenseClaim;
+import com.encora.expenses.domain.*;
 import com.encora.expenses.exceptions.EmployeeNotFoundException;
 import com.encora.expenses.management.ExpenseManagementProcess;
 import com.encora.expenses.management.ExpressExpenseManagementProcess;
 import com.encora.expenses.management.RegularExpenseManagementProcess;
 import com.encora.expenses.ui.UIFunctions;
 import com.encora.expenses.utilities.ExpenseAnalysis;
+import com.encora.expenses.utilities.ExpenseAnalysisImpl;
 import com.encora.expenses.utilities.ExpenseAnalysisTempImpl;
 
 import java.time.LocalDate;
@@ -16,10 +15,10 @@ import java.util.Scanner;
 
 public class ExpenseManagementSystem {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException {
         Scanner scanner = new Scanner(System.in);
         UIFunctions uiFunctions = new UIFunctions();
-        Employees employees = new Employees();
+        Employees employees = new EmployeesDatabaseImpl();
 
         ExpenseManagementProcess expressEMP = new ExpressExpenseManagementProcess();
         ExpenseManagementProcess regularEMP = new RegularExpenseManagementProcess();
@@ -41,7 +40,7 @@ public class ExpenseManagementSystem {
 
             String option = scanner.nextLine();
 
-            ExpenseAnalysis expenseAnalysis = new ExpenseAnalysisTempImpl();
+            ExpenseAnalysis expenseAnalysis = new ExpenseAnalysisImpl(employees);
 
             switch (option) {
                 case "e":
